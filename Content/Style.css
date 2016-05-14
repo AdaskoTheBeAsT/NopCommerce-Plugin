@@ -1,0 +1,38 @@
+﻿.link {
+    width:90%;
+}
+
+ label {
+        width: 15%;
+        display: block;
+        font-weight: bold;
+    }
+
+    #fieldlist li {
+        list-style: none;
+        padding-bottom: .7em;
+    }
+
+    .button {
+        margin-top: 1em;
+    }
+
+    .productName {
+        min-width: 25%;
+    }
+
+    .labelPre {
+        font-weight: bold;
+        padding-right: 0%;
+        width: auto;
+    }
+
+    li {
+        list-style: none;
+        padding-bottom: .7em;
+    }
+
+    .category {
+        padding: 5px;
+        margin-left: 10px;
+    }

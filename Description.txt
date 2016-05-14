@@ -1,0 +1,8 @@
+﻿Group: Misc
+FriendlyName: Import Products
+SystemName: Misc.ImportProducts
+Version: 1.0
+SupportedVersions: 3.70
+Author: kukuczka.net
+DisplayOrder: 1
+FileName: Nop.Plugin.Misc.ImportProducts.dll

@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+
+    Html.AddCssFileParts("~/Plugins/Misc.ImportProducts/Content/Style.css");
+    Html.AddCssFileParts("~/Plugins/Misc.ImportProducts/Content/bootstrap.min.css");
+    Html.AddScriptParts("~/Plugins/Misc.ImportProducts/Scripts/custom.js");
+}
+
+@model Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS
+<meta content="text/html; charset=utf-8">
+
+@using System
+@using Nop.Core.Infrastructure
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+<div class="k-content">
+    <div id="tickets" class="display">
+        @using (Html.BeginForm("ImportMotyleKsiazkowe", "MiscImportProducts"))
+        {
+            @Html.AntiForgeryToken()
+            <ul id="fieldlist">
+                <li>
+                    <label for="priceIncrease" class="labelPre">Price inrease percent </label>
+                    <input type="text" value="10" name="priceIncrease" class="k-textbox" /> <br />
+                </li>
+            </ul>
+            <ul id="fieldlist">
+                <li>
+                    <p>Limited to stores @Html.CheckBoxFor(model => @Model.isLimitedToStores, new { @id = "isStores" }) </p>
+                </li>
+            </ul>
+            <div class="stores">
+                @for (int i = 0; i < @Model.shopsAddTo.Count(); i++)
+                {
+                    <ul id="fieldlist">
+                        <li>
+                            @Html.CheckBoxFor(model => model.shopsAddTo[i].isChecked)
+                            @Html.EditorFor(model => model.shopsAddTo[i].store.Name, new { @class = "k-textbox" }) <br />
+                            @Html.HiddenFor(model => @Model.shopsAddTo[i].store.Id)
+                        </li>
+                    </ul>
+                }
+            </div>
+            for (int i = 0; i < @Model.warehousesList.Count(); i++)
+            {
+                <ul id="fieldlist">
+                    <li>
+                        @Html.CheckBoxFor(model => model.warehousesList[i].isChecked)
+                        @Html.EditorFor(model => model.warehousesList[i].warehouse.Name, new { @class = "k-textbox" }) <br />
+                        @Html.HiddenFor(model => @Model.warehousesList[i].warehouse.Id)
+                    </li>
+                </ul>
+            }
+            for (int i = 0; i < @Model.product.Count(); i++)
+            {
+                <ul id="products">
+                    <li>
+                        <p>
+                           Is needed : @Html.EditorFor(model => @Model.product[i].isNeeded)
+
+                           <label class="labelPre">Product name : </label>
+                           @Html.TextBoxFor(model => @Model.product[i].Name, new { @class = "k-textbox productName" })
+
+
+
+                           @if (@Model.product[i].categoryMapped.Length > 0)
+                           {
+                            @Html.DropDownListFor(m => @Model.product[i].categoryMapped[0], new SelectList(@Model.mainCategoriesMapped, @Model.product[i].categoryMapped[0]), @Model.product[i].categoryMapped[0], new { @class = "k-widget k-dropdown k-header k-state-default category" })
+                           }
+                           @if (@Model.product[i].categoryMapped.Length > 1)
+                           {
+                            @Html.DropDownListFor(m => @Model.product[i].categoryMapped[1], new SelectList(@Model.subCategoriesMapped, @Model.product[i].categoryMapped[1]), @Model.product[i].categoryMapped[1], new { @class = "k-widget k-dropdown k-header k-state-default category" })
+                           }
+                           @if (@Model.product[i].categoryMapped.Length > 2)
+                           {
+                            @Html.DropDownListFor(m => @Model.product[i].categoryMapped[2], new SelectList(@Model.subCategoriesMapped, @Model.product[i].categoryMapped[2]), @Model.product[i].categoryMapped[2], new { @class = "k-widget k-dropdown k-header k-state-default category" })
+                           }
+                        </p>
+                    </li>
+                </ul>
+
+                for (int j = 0; j < @Model.product[i].Firms.Count(); j++)
+                {
+                    @Html.HiddenFor(x => @Model.product[i].Firms[j])
+                }
+                for (int j = 0; j < @Model.product[i].Persons.Count(); j++)
+                {
+                    @Html.HiddenFor(x => @Model.product[i].Persons[j])
+                }
+
+                @Html.HiddenFor(model => @Model.product[i].Ean)
+                @Html.HiddenFor(model => @Model.product[i].Original_name)
+                @Html.HiddenFor(model => @Model.product[i].PKWIU)
+                @Html.HiddenFor(model => @Model.product[i].Series)
+                @Html.HiddenFor(model => @Model.product[i].Url_img)
+                @Html.HiddenFor(model => @Model.product[i].ISBN)
+                @Html.HiddenFor(model => @Model.product[i].Count_pages)
+                @Html.HiddenFor(model => @Model.product[i].Dimensions)
+                @Html.HiddenFor(model => @Model.product[i].Description)
+                @Html.HiddenFor(model => @Model.product[i].Price)
+                @Html.HiddenFor(model => @Model.product[i].Vat)
+
+                @Html.HiddenFor(model => @Model.product[i].Stock)
+                @Html.HiddenFor(model => @Model.product[i].Categories)
+            }
+
+            <ul id="fieldlist">
+                <li>
+                    <input type="submit" value="Update" class="k-button k-primary button" />
+                </li>
+            </ul>
+        }
+        <div class="holder"></div>
+
+    </div>
+</div>
+
+
