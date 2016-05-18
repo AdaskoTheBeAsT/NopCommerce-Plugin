@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="products">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="product">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:string" />
+              <xs:element name="name" type="xs:string" />
+              <xs:element name="ean" type="xs:string" />
+              <xs:element name="ean1" type="xs:string" />
+              <xs:element name="ean2" type="xs:string" />
+              <xs:element name="description" type="xs:string" />
+              <xs:element name="images">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="image" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="price" type="xs:string" />
+              <xs:element name="suggested_price" type="xs:string" />
+              <xs:element name="vat" type="xs:string" />
+              <xs:element name="weight" type="xs:string" />
+              <xs:element name="stock" type="xs:string" />
+              <xs:element name="category" type="xs:string" />
+              <xs:element name="manufacturer" type="xs:string" />
+              <xs:element name="manufacturer_code" type="xs:string" />
+              <xs:element name="guarantee" type="xs:unsignedByte" />
+              <xs:element name="available" type="xs:string" />
+              <xs:element name="sex" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

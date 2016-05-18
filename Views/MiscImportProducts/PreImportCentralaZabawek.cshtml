@@ -6,7 +6,7 @@
     Html.AddScriptParts("~/Plugins/Misc.ImportProducts/Scripts/custom.js");
 }
 
-@model Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products
+@model Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.Products
 @using Nop.Web.Framework.UI;
 
 <div class="k-content">
@@ -17,10 +17,10 @@
             <ul id="fieldlist">
                 <li>
                     <label for="priceIncrease" class="labelPre">Price inrease percent </label>
-                    <input type="text" value="10" name="priceIncrease" class="k-textbox" /> <br />
+                    <input type="text" value="10" name="priceIncrease" class="k-textbox"/> <br/>
                 </li>
             </ul>
-            for (int i = 0; i < @Model.product.Count(); i++)
+            for (var i = 0; i < @Model.product.Count(); i++)
             {
                 <ul id="products">
                     <li>
@@ -36,7 +36,6 @@
                             @if (@Model.product[i].categoryMapped.Length > 1)
                             {
                                 @Html.DropDownListFor(m => @Model.product[i].categoryMapped[1], new SelectList(@Model.subCategoriesMapped, @Model.product[i].categoryMapped[1]), @Model.product[i].categoryMapped[1], new { @class = "k-widget k-dropdown k-header k-state-default category" })
-
                             }
                             @if (@Model.product[i].categoryMapped.Length > 2)
                             {
@@ -45,7 +44,7 @@
                         </p>
                     </li>
                 </ul>
-                for (int j = 0; j < @Model.product[i].picturePaths.Count(); j++)
+                for (var j = 0; j < @Model.product[i].picturePaths.Count(); j++)
                 {
                     @Html.HiddenFor(x => @Model.product[i].picturePaths[j])
                 }
@@ -61,36 +60,38 @@
                 @Html.HiddenFor(model => @Model.product[i].Guarantee)
                 @Html.HiddenFor(model => @Model.product[i].Sex)
             }
+
             <ul id="fieldlist">
                 <li>
                     <p>Limited to stores @Html.CheckBoxFor(model => @Model.isLimitedToStores, new { @id = "isStores" }) </p>
                 </li>
             </ul>
             <div class="stores">
-                @for (int i = 0; i < @Model.shopsAddTo.Count(); i++)
+                @for (var i = 0; i < @Model.shopsAddTo.Count(); i++)
                 {
                     <ul id="fieldlist">
                         <li>
                             @Html.CheckBoxFor(model => model.shopsAddTo[i].isChecked)
-                            @Html.EditorFor(model => model.shopsAddTo[i].store.Name, new { @class = "k-textbox" }) <br />
+                            @Html.EditorFor(model => model.shopsAddTo[i].store.Name, new { @class = "k-textbox" }) <br/>
                             @Html.HiddenFor(model => @Model.shopsAddTo[i].store.Id)
                         </li>
                     </ul>
                 }
             </div>
-            for (int i = 0; i < @Model.warehousesList.Count(); i++)
-                {
+            for (var i = 0; i < @Model.warehousesList.Count(); i++)
+            {
                 <ul id="fieldlist">
                     <li>
                         @Html.CheckBoxFor(model => model.warehousesList[i].isChecked)
-                        @Html.EditorFor(model => model.warehousesList[i].warehouse.Name, new { @class = "k-textbox" }) <br />
+                        @Html.EditorFor(model => model.warehousesList[i].warehouse.Name, new { @class = "k-textbox" }) <br/>
                         @Html.HiddenFor(model => @Model.warehousesList[i].warehouse.Id)
                     </li>
                 </ul>
             }
+
             <ul id="fieldlist">
                 <li>
-                    <input type="submit" value="Update" class="k-button k-primary button" />
+                    <input type="submit" value="Update" class="k-button k-primary button"/>
                 </li>
             </ul>
         }

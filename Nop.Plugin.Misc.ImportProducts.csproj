@@ -251,6 +251,7 @@
     <Compile Include="RouteProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Przykladowe1.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -267,7 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Przykladowe.xml">
+    <Content Include="App_Data\Przykladowe.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
@@ -301,6 +302,9 @@
   <ItemGroup>
     <None Include="AdaskoMinimumRecommendedRules.ruleset" />
     <None Include="app.config" />
+    <None Include="App_Data\ProductsSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap-theme.min.css.map" />
     <None Include="Content\bootstrap.css.map" />

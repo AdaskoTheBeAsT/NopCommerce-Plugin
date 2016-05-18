@@ -5,10 +5,11 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-    using Nop.Core.Domain.Shipping;
-    using Nop.Core.Domain.Stores;
+
     using Nop.Core.Infrastructure;
     using Nop.Plugin.Misc.ImportProducts.Model;
+    using Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek;
+    using Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe;
     using Nop.Services.Security;
     using Nop.Services.Shipping;
     using Nop.Services.Stores;
@@ -17,23 +18,22 @@
     [AdminAuthorize]
     public class MiscImportProductsController : BasePluginController
     {
-        IImportService _IImportService;
-        IStoreService _storeService;
-        IShippingService _shippingService;
+        private readonly IImportService _importService;
+        private readonly IStoreService _storeService;
+        private readonly IShippingService _shippingService;
 
-
-        public MiscImportProductsController(IImportService IImportService, IStoreService storeService, IShippingService shippingService)
+        public MiscImportProductsController(IImportService importService, IStoreService storeService, IShippingService shippingService)
         {
-            this._IImportService = IImportService;
-            this._storeService = storeService;
-            this._shippingService = shippingService;
+            _importService = importService;
+            _storeService = storeService;
+            _shippingService = shippingService;
         }
 
         [ChildActionOnly]
         public ActionResult Configure()
         {
-            var _permissionService = EngineContext.Current.Resolve<IPermissionService>();
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            var permissionService = EngineContext.Current.Resolve<IPermissionService>();
+            if (!permissionService.Authorize(StandardPermissionProvider.ManageProducts))
             {
                 return AccessDeniedView();
             }
@@ -43,8 +43,8 @@
 
         public ActionResult Import()
         {
-            var _permissionService = EngineContext.Current.Resolve<IPermissionService>();
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            var permissionService = EngineContext.Current.Resolve<IPermissionService>();
+            if (!permissionService.Authorize(StandardPermissionProvider.ManageProducts))
             {
                 return AccessDeniedView();
             }
@@ -55,8 +55,8 @@
         [HttpPost]
         public ActionResult PreImport(importData importData, HttpPostedFileBase file)
         {
-            var _permissionService = EngineContext.Current.Resolve<IPermissionService>();
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            var permissionService = EngineContext.Current.Resolve<IPermissionService>();
+            if (!permissionService.Authorize(StandardPermissionProvider.ManageProducts))
             {
                 return AccessDeniedView();
             }
@@ -75,87 +75,85 @@
 
             if (importData.targetWholesale == "Centrala Zabawek")
             {
-                Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products model = null;
+                Products model = null;
                 model = PrepareCentralaZabawek(importData);
                 return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/PreImportCentralaZabawek.cshtml", model);
             }
 
             if (importData.targetWholesale == "Motyle")
             {
-               Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS model = PrepareMotyle(importData);
+               var model = PrepareMotyle(importData);
                return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/PreImportMotyle.cshtml", model);
             }
 
             return View();
         }
 
-        public ActionResult ImportCentralaZabawek(Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products productsToImport)
+        public ActionResult ImportCentralaZabawek(Products productsToImport)
         {
-            var _permissionService = EngineContext.Current.Resolve<IPermissionService>();
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            var permissionService = EngineContext.Current.Resolve<IPermissionService>();
+            if (!permissionService.Authorize(StandardPermissionProvider.ManageProducts))
             {
                 return AccessDeniedView();
             }
 
-            _IImportService.ImportCentralaZabawek(productsToImport);
-            return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/Import.cshtml");//w przyszlosci zwracaj widok z zaimporotwanymi produktami
+            _importService.ImportCentralaZabawek(productsToImport);
+            return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/Import.cshtml");// w przyszlosci zwracaj widok z zaimporotwanymi produktami
         }
 
         protected ActionResult AccessDeniedView()
         {
-            return RedirectToAction("AccessDenied", "Security", new { pageUrl = this.Request.RawUrl });
+            return RedirectToAction("AccessDenied", "Security", new { pageUrl = Request.RawUrl });
         }
 
-        protected Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products PrepareCentralaZabawek(importData importData)
+        protected Products PrepareCentralaZabawek(importData importData)
         {
-            Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products model = null;
+            Products model = null;
 
-            if (importData.filePath !=null)
-                 model = _IImportService.LoadProductFromFileCentralaZabawek(importData.filePath);
-            if (importData.link !=null)
-                 model = _IImportService.LoadProductsCentralaZabawek(importData);
+            if (importData.filePath != null)
+            {
+                model = _importService.LoadProductFromFileCentralaZabawek(importData.filePath);
+            }
+
+            if (importData.link != null)
+            {
+                model = _importService.LoadProductsCentralaZabawek(importData);
+            }
 
             var storesIList = _storeService.GetAllStores();
-            List<Store> storeList = storesIList.ToList();
-            storeChecked st;
-            List<storeChecked> storeChekedList = new List<storeChecked>();
+            var storeList = storesIList.ToList();
+            var storeChekedList = new List<storeChecked>();
 
-            //prepare stores list
+            // prepare stores list
             foreach (var store in storeList)
             {
-                st = new storeChecked();
-                st.store = store;
-                st.isChecked = false;
-
+                var st = new storeChecked { store = store, isChecked = false };
                 storeChekedList.Add(st);
             }
 
-            //prepare categories to map in View (and couple other properties)
-            string categoryReplace;
-            List<string> mainCategoryMapped = new List<string>();
-            List<string> subCategoryMapped = new List<string>();
+            // prepare categories to map in View (and couple other properties)
+            var mainCategoryMapped = new List<string>();
+            var subCategoryMapped = new List<string>();
             subCategoryMapped.Add(string.Empty);
             foreach (var prod in model.product)
             {
-                categoryReplace = prod.Category.Replace(", ", ">");
-                prod.categoryMapped = categoryReplace.Split('>');
+                var categoryReplace = prod.Category.Replace(", ", ">");
+                prod.CategoryMapped = categoryReplace.Split('>');
 
-                if (prod.categoryMapped.Length > 0 && !mainCategoryMapped.Contains(prod.categoryMapped[0]))
-                    mainCategoryMapped.Add(prod.categoryMapped[0]);
-                //tu powinien być foreach
-                if (prod.categoryMapped.Length > 1 && !subCategoryMapped.Contains(prod.categoryMapped[1]))
-                    subCategoryMapped.Add(prod.categoryMapped[1]);
-                if (prod.categoryMapped.Length > 2 && !subCategoryMapped.Contains(prod.categoryMapped[2]))
-                    subCategoryMapped.Add(prod.categoryMapped[2]);
-                prod.isNeeded = true;
+                if (prod.CategoryMapped.Length > 0 && !mainCategoryMapped.Contains(prod.CategoryMapped[0])) mainCategoryMapped.Add(prod.CategoryMapped[0]);
+
+                // tu powinien być foreach
+                if (prod.CategoryMapped.Length > 1 && !subCategoryMapped.Contains(prod.CategoryMapped[1])) subCategoryMapped.Add(prod.CategoryMapped[1]);
+                if (prod.CategoryMapped.Length > 2 && !subCategoryMapped.Contains(prod.CategoryMapped[2])) subCategoryMapped.Add(prod.CategoryMapped[2]);
+                prod.IsNeeded = true;
             }
 
             var warehouses = _shippingService.GetAllWarehouses();
-            List<Warehouse> warehouseList = warehouses.ToList();
+            var warehouseList = warehouses.ToList();
             warehouseChecked whc;
-            List<warehouseChecked> warehouseChecked = new List<warehouseChecked>();
+            var warehouseChecked = new List<warehouseChecked>();
 
-            foreach (Warehouse wh in warehouseList)
+            foreach (var wh in warehouseList)
             {
                 whc = new warehouseChecked();
                 whc.warehouse = wh;
@@ -170,26 +168,27 @@
             model.mainCategoriesMapped = mainCategoryMapped;
             model.subCategoriesMapped = subCategoryMapped;
 
-            //var pageNumber = page ?? 1;
-            //model.pagedProductList = (PagedList<product>) model.product.ToPagedList(pageNumber, 30);
+            // var pageNumber = page ?? 1;
+            // model.pagedProductList = (PagedList<product>) model.product.ToPagedList(pageNumber, 30);
             return model;
         }
 
-        private Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS PrepareMotyle(importData importData)
+        private PRODUCTS PrepareMotyle(importData importData)
         {
-            Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS model = null; // sprawdz czy na pewno w tym wypadku model bedzie typu products, pewnie nie
+            PRODUCTS model = null; // sprawdz czy na pewno w tym wypadku model bedzie typu products, pewnie nie
             if (importData.filePath != null)
-                //model = _IImportService.LoadProductsFromXSLFileMotyle(importData.filePath);
-                model = _IImportService.LoadFromXMLFileMotyle(importData.filePath);
+
+                // model = _IImportService.LoadProductsFromXSLFileMotyle(importData.filePath);
+                model = _importService.LoadFromXMLFileMotyle(importData.filePath);
             if (importData.link != null)
-                model = _IImportService.LoadProductsFromXML(importData);
+                model = _importService.LoadProductsFromXML(importData);
 
             var storesIList = _storeService.GetAllStores();
-            List<Store> storeList = storesIList.ToList();
+            var storeList = storesIList.ToList();
             storeChecked st;
-            List<storeChecked> storeChekedList = new List<storeChecked>();
+            var storeChekedList = new List<storeChecked>();
 
-            //prepare stores list
+            // prepare stores list
             foreach (var store in storeList)
             {
                 st = new storeChecked();
@@ -199,10 +198,10 @@
                 storeChekedList.Add(st);
             }
 
-            //prepare categories to map in View (and couple other properties)
+            // prepare categories to map in View (and couple other properties)
             string categoryReplace;
-            List<string> mainCategoryMapped = new List<string>();
-            List<string> subCategoryMapped = new List<string>();
+            var mainCategoryMapped = new List<string>();
+            var subCategoryMapped = new List<string>();
             subCategoryMapped.Add(string.Empty);
             foreach (var prod in model.product)
             {
@@ -210,24 +209,22 @@
                 {
                     prod.categoryMapped = prod.Categories.Split('/');
 
-                    if (prod.categoryMapped.Length > 0 && !mainCategoryMapped.Contains(prod.categoryMapped[0]))
-                        mainCategoryMapped.Add(prod.categoryMapped[0]);
-                    //tu powinien być foreach
-                    if (prod.categoryMapped.Length > 1 && !subCategoryMapped.Contains(prod.categoryMapped[1]))
-                        subCategoryMapped.Add(prod.categoryMapped[1]);
-                    if (prod.categoryMapped.Length > 2 && !subCategoryMapped.Contains(prod.categoryMapped[2]))
-                        subCategoryMapped.Add(prod.categoryMapped[2]);
+                    if (prod.categoryMapped.Length > 0 && !mainCategoryMapped.Contains(prod.categoryMapped[0])) mainCategoryMapped.Add(prod.categoryMapped[0]);
+
+                    // tu powinien być foreach
+                    if (prod.categoryMapped.Length > 1 && !subCategoryMapped.Contains(prod.categoryMapped[1])) subCategoryMapped.Add(prod.categoryMapped[1]);
+                    if (prod.categoryMapped.Length > 2 && !subCategoryMapped.Contains(prod.categoryMapped[2])) subCategoryMapped.Add(prod.categoryMapped[2]);
 
                     prod.isNeeded = false;
                 }
             }
 
             var warehouses = _shippingService.GetAllWarehouses();
-            List<Warehouse> warehouseList = warehouses.ToList();
+            var warehouseList = warehouses.ToList();
             warehouseChecked whc;
-            List<warehouseChecked> warehouseChecked = new List<warehouseChecked>();
+            var warehouseChecked = new List<warehouseChecked>();
 
-            foreach (Warehouse wh in warehouseList)
+            foreach (var wh in warehouseList)
             {
                 whc = new warehouseChecked();
                 whc.warehouse = wh;
@@ -247,7 +244,7 @@
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ImportMotyleKsiazkowe(Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS productsToImport)
+        public ActionResult ImportMotyleKsiazkowe(PRODUCTS productsToImport)
         {
             var _permissionService = EngineContext.Current.Resolve<IPermissionService>();
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
@@ -255,7 +252,7 @@
                 return AccessDeniedView();
             }
 
-            _IImportService.ImportMotyle(productsToImport);
+            _importService.ImportMotyle(productsToImport);
             return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/Import.cshtml");
         }
     }

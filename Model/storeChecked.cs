@@ -5,6 +5,7 @@
     public class storeChecked
     {
         public Store store { get; set; }
+
         public bool isChecked { get; set; }
     }
 }

@@ -6,3 +6,8 @@ SupportedVersions: 3.70
 Author: kukuczka.net
 DisplayOrder: 1
 FileName: Nop.Plugin.Misc.ImportProducts.dll
+
+
+
+Adasko
+http://www.xsd2code.com/en-us/download.aspx

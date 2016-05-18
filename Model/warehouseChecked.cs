@@ -5,6 +5,7 @@
     public class warehouseChecked
     {
             public Warehouse warehouse { get; set; }
+
             public bool isChecked { get; set; }
     }
 }

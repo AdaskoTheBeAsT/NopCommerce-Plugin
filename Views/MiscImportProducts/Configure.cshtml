@@ -1,18 +1,21 @@
-﻿
-@{
-    Layout = "";
+﻿@{
+    Layout = string.Empty;
 }
 
 
 <p>Hello</p>
 @using (Html.BeginForm("Import", "MiscImportProducts"))
 {
-    <label for="link">XML link</label>  <input type="text" id="ss" name="link" style="width:80%;"/><br />
-    <label for="login">login</label>  <input type="text" id="ss" name="login" />
-    <label for="password">Password</label>  <input type="text" id="ss" name="password" /><br />
+    <label for="link">XML link</label>
+    <input type="text" id="ss" name="link" style="width: 80%;"/>
+    <br/>
+    <label for="login">login</label>
+    <input type="text" id="ss" name="login"/>
+    <label for="password">Password</label>
+    <input type="text" id="ss" name="password"/>
+    <br/>
 
-   
-
-    <label for="pricePerCent">Price increase percentage</label>  <input type="text" id="ss" name="pricePerCent" />
-    <input type = "submit" value = "Update" />
+    <label for="pricePerCent">Price increase percentage</label>
+    <input type="text" id="ss" name="pricePerCent"/>
+    <input type="submit" value="Update"/>
 }

@@ -22,7 +22,6 @@ C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Views\MiscImportProducts\Pre
 C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Views\MiscImportProducts\PreImportMotyle.cshtml
 C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Content\bootstrap.min.css
 C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Content\Style.css
-C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Przykladowe.xml
 C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Scripts\custom.js
 C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Nop.Plugin.Misc.ImportProducts.dll.config
 C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\Nop.Plugin.Misc.ImportProducts.dll
@@ -31,3 +30,4 @@ C:\github\NopCommerce-Plugin\obj\Debug\Nop.Plugin.Misc.ImportProducts.csproj.App
 C:\github\NopCommerce-Plugin\obj\Debug\Nop.Plugin.Misc.ImportProducts.csprojResolveAssemblyReference.cache
 C:\github\NopCommerce-Plugin\obj\Debug\Nop.Plugin.Misc.ImportProducts.dll
 C:\github\NopCommerce-Plugin\obj\Debug\Nop.Plugin.Misc.ImportProducts.pdb
+C:\Presentation\Nop.Web\Plugins\Misc.ImportProducts\App_Data\Przykladowe.xml

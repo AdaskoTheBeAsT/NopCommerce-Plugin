@@ -1,38 +1,28 @@
-﻿@model Nop.Plugin.Misc.ImportProducts.Model.importData
+﻿@using Nop.Web.Framework.UI
+@model Nop.Plugin.Misc.ImportProducts.Model.importData
 @{
     Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
     Html.AddCssFileParts("~/Plugins/Misc.ImportProducts/Content/Style.css");
     Html.AddCssFileParts("~/Plugins/Misc.ImportProducts/Content/bootstrap.min.css");
 }
-@using Nop.Web.Framework.UI;
 
 @Html.AntiForgeryToken()
 
 @{
-            List<SelectListItem> wholesales = new List<SelectListItem>();
-            wholesales.Add(new SelectListItem
-            {
-                Text = "Centrala Zabawek",
-                Value = "Centrala Zabawek"
-            });
-            wholesales.Add(new SelectListItem
-            {
-                Text = "Motyle",
-                Value = "Motyle",
-                Selected = true
-            });
-
+    var wholesales = new List<SelectListItem>();
+    wholesales.Add(new SelectListItem { Text = "Centrala Zabawek", Value = "Centrala Zabawek" });
+    wholesales.Add(new SelectListItem { Text = "Motyle", Value = "Motyle", Selected = true });
 }
 
 <div class="k-content">
     <div id="tickets">
-        
+
         @using (Html.BeginForm("PreImport", "MiscImportProducts", FormMethod.Post, new { @id = "ticketsForm", enctype = "multipart/form-data" }))
         {
             <ul id="fieldlist">
                 <li>
                     <label for="link">Choose wholesale</label>
-                    @Html.DropDownListFor(m => m.targetWholesale, wholesales, "", new { @class = "k-widget k-dropdown k-header k-state-default" })
+                    @Html.DropDownListFor(m => m.targetWholesale, wholesales, string.Empty, new { @class = "k-widget k-dropdown k-header k-state-default" })
                     @Html.ValidationMessageFor(model => model.targetWholesale)
                 </li>
                 <li>
@@ -51,25 +41,25 @@
                     @Html.ValidationMessageFor(model => model.password)
                 </li>
 
-                <input type="submit" value="Update" class="k-button k-primary button" />
+                <input type="submit" value="Update" class="k-button k-primary button"/>
             </ul>
         }
-        
+
         <p>OR load from file</p>
         @using (Html.BeginForm("PreImport", "MiscImportProducts", FormMethod.Post, new { @id = "ticketsForm", enctype = "multipart/form-data" }))
         {
             <ul id="fieldlist">
                 <li>
                     <label for="link">Choose wholesale</label>
-                    @Html.DropDownListFor(m => m.targetWholesale, wholesales, "", new { @class = "k-widget k-dropdown k-header k-state-default" })
+                    @Html.DropDownListFor(m => m.targetWholesale, wholesales, string.Empty, new { @class = "k-widget k-dropdown k-header k-state-default" })
                     @Html.ValidationMessageFor(model => model.targetWholesale)
                 </li>
                 <li>
                     <label for="link">XML file path</label>
-                    <input type="file" name="file" class="k-button button" />
+                    <input type="file" name="file" class="k-button button"/>
                 </li>
 
-                <input type="submit" value="Send" class="k-button k-primary button" />
+                <input type="submit" value="Send" class="k-button k-primary button"/>
             </ul>
         }
     </div>
