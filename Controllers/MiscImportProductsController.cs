@@ -1,35 +1,19 @@
-﻿using Nop.Web.Framework.Controllers;
-using Nop.Web.Framework.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Nop.Web.Controllers;
-using System.Xml;
-using System.Web;
-using Nop.Services.Media;
-using Nop.Core.Infrastructure;
-using Nop.Services.Catalog;
-using Nop.Core.Domain.Catalog;
-using System.Net;
-using System.IO;
-using Nop.Services.Tax;
-using Nop.Core.Domain.Tax;
-using Nop.Services.Configuration;
-using Nop.Plugin.Misc.ImportProducts.Model;
-using System.Xml.Serialization;
-using Nop.Admin.Models.Catalog;
-using Nop.Services.Security;
-using Nop.Services.Stores;
-using Nop.Core.Domain.Stores;
-using Nop.Services.Shipping;
-using Nop.Core.Domain.Shipping;
-using PagedList;
-
-namespace Nop.Plugin.Misc.ImportProducts.Controllers
+﻿namespace Nop.Plugin.Misc.ImportProducts.Controllers
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+    using Nop.Core.Domain.Shipping;
+    using Nop.Core.Domain.Stores;
+    using Nop.Core.Infrastructure;
+    using Nop.Plugin.Misc.ImportProducts.Model;
+    using Nop.Services.Security;
+    using Nop.Services.Shipping;
+    using Nop.Services.Stores;
+    using Nop.Web.Framework.Controllers;
+
     [AdminAuthorize]
     public class MiscImportProductsController : BasePluginController
     {

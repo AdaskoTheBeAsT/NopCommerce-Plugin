@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using Nop.Services.Localization;
-
-namespace Nop.Plugin.Misc.ImportProducts.Model
+﻿namespace Nop.Plugin.Misc.ImportProducts.Model
 {
+    using FluentValidation;
+    using Nop.Services.Localization;
+
     public class importViewModelValidator : AbstractValidator<importData>
     {
         public importViewModelValidator(ILocalizationService localizationService)

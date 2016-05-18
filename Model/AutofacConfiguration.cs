@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
-using Autofac.Builder;
-using Autofac.Core;
-using Nop.Core.Infrastructure.DependencyManagement;
-using Nop.Plugin.Misc.ImportProducts.Controllers;
-using Nop.Core.Infrastructure;
-using Nop.Core.Configuration;
-
-namespace Nop.Plugin.Misc.ImportProducts.Model
+﻿namespace Nop.Plugin.Misc.ImportProducts.Model
 {
+    using Autofac;
+    using Nop.Core.Configuration;
+    using Nop.Core.Infrastructure;
+    using Nop.Core.Infrastructure.DependencyManagement;
+    using Nop.Plugin.Misc.ImportProducts.Controllers;
+
     public class DependencyRegistrar : IDependencyRegistrar
     {
         public int Order

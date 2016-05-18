@@ -1,12 +1,7 @@
-﻿using Nop.Core.Domain.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nop.Plugin.Misc.ImportProducts.Model
+﻿namespace Nop.Plugin.Misc.ImportProducts.Model
 {
+    using Nop.Core.Domain.Stores;
+
     public class storeChecked
     {
         public Store store { get; set; }

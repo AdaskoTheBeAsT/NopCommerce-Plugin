@@ -1,14 +1,8 @@
-﻿using FluentValidation.Attributes;
-using Nop.Plugin.Misc.ImportProducts.Controllers;
-using Nop.Web.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nop.Plugin.Misc.ImportProducts.Model
+﻿namespace Nop.Plugin.Misc.ImportProducts.Model
 {
+    using FluentValidation.Attributes;
+    using Nop.Web.Framework;
+
     [Validator(typeof(importViewModelValidator))]
     public class importData
     {

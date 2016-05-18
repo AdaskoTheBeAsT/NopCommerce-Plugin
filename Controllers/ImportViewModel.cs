@@ -1,40 +1,25 @@
-﻿using Nop.Core.Domain.Catalog;
-using Nop.Core.Domain.Tax;
-using Nop.Core.Infrastructure;
-using Nop.Core.Infrastructure.DependencyManagement;
-using Nop.Plugin.Misc.ImportProducts.Model;
-using Nop.Services.Catalog;
-using Nop.Services.Configuration;
-using Nop.Services.Media;
-using Nop.Services.Tax;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Xml.Serialization;
-using Nop.Web.Framework.Mvc;
-using Nop.Core.Configuration;
-using Nop.Web.Framework.Validators;
-using Nop.Core.Domain.Localization;
-using System.Xml;
-using Nop.Services.Stores;
-using Nop.Core.Domain.Stores;
-using Nop.Services.Localization;
-using Nop.Services.Logging;
-using Nop.Core.Domain.Shipping;
-using Nop.Admin.Models.Catalog;
-using Nop.Core;
-using Nop.Services.Shipping;
-using Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe;
-using System.Collections.Specialized;
-using System.Text.RegularExpressions;
-
-namespace Nop.Plugin.Misc.ImportProducts.Controllers
+﻿namespace Nop.Plugin.Misc.ImportProducts.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Text;
+    using System.Web;
+    using System.Xml.Serialization;
+    using Nop.Core.Domain.Catalog;
+    using Nop.Core.Domain.Tax;
+    using Nop.Plugin.Misc.ImportProducts.Model;
+    using Nop.Services.Catalog;
+    using Nop.Services.Configuration;
+    using Nop.Services.Localization;
+    using Nop.Services.Logging;
+    using Nop.Services.Media;
+    using Nop.Services.Shipping;
+    using Nop.Services.Stores;
+    using Nop.Services.Tax;
+
     public class ImportViewModel : IImportService
     {
         IPictureService _pictureService;

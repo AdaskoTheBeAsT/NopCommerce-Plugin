@@ -1,19 +1,14 @@
-﻿using Nop.Core.Domain.Localization;
-using Nop.Core.Plugins;
-using Nop.Services.Localization;
-using Nop.Web.Framework.Menu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Configuration;
-using System.Web.Configuration;
-using System.Web.Routing;
-
-namespace Nop.Plugin.Misc.ImportProducts
+﻿namespace Nop.Plugin.Misc.ImportProducts
 {
+    using System.Configuration;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Routing;
+    using Nop.Core.Plugins;
+    using Nop.Services.Localization;
+    using Nop.Web.Framework.Menu;
+
     public class ImportProductsPlugin : BasePlugin,  IAdminMenuPlugin, Nop.Services.Common.IMiscPlugin
     {
         ILocalizationService _localizationService;

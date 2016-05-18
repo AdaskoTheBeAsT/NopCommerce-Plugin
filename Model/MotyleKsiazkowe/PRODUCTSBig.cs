@@ -1,15 +1,12 @@
-﻿using FluentValidation.Attributes;
-using Nop.Web.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Xml.Serialization;
-
-namespace Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe
+﻿namespace Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using System.Xml.Serialization;
+    using FluentValidation.Attributes;
+    using Nop.Web.Framework;
+
     [Serializable]
     public class PRODUCT
     {

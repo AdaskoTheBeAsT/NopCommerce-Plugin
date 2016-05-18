@@ -1,20 +1,12 @@
-﻿
-using FluentValidation.Attributes;
-using Nop.Core.Domain.Shipping;
-using Nop.Core.Domain.Stores;
-using Nop.Web.Framework;
-using Nop.Web.Framework.Mvc;
-using PagedList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Xml.Serialization;
-
-namespace Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek
+﻿namespace Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using System.Xml.Serialization;
+    using FluentValidation.Attributes;
+    using Nop.Web.Framework;
+
     [Serializable]
     public class product
     {
