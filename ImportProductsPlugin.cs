@@ -54,7 +54,7 @@
             HttpRuntimeSection section = ConfigurationManager.GetSection("system.web/httpRuntime") as HttpRuntimeSection;
             var sect = ConfigurationManager.GetSection("system.web");
             section.MaxRequestLength = 1048576; //read only - not works
-            
+
             config.Save();
         }
 

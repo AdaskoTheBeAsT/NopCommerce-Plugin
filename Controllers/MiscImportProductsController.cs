@@ -40,7 +40,7 @@
 
             return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/Configure.cshtml");
         }
-        
+
         public ActionResult Import()
         {
             var _permissionService = EngineContext.Current.Resolve<IPermissionService>();
@@ -75,7 +75,7 @@
 
             if (importData.targetWholesale == "Centrala Zabawek")
             {
-                Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products model = null;  
+                Nop.Plugin.Misc.ImportProducts.Model.CentralaZabawek.products model = null;
                 model = PrepareCentralaZabawek(importData);
                 return View("~/Plugins/Misc.ImportProducts/Views/MiscImportProducts/PreImportCentralaZabawek.cshtml", model);
             }
@@ -113,7 +113,7 @@
             if (importData.filePath !=null)
                  model = _IImportService.LoadProductFromFileCentralaZabawek(importData.filePath);
             if (importData.link !=null)
-                 model = _IImportService.LoadProductsCentralaZabawek(importData);     
+                 model = _IImportService.LoadProductsCentralaZabawek(importData);
 
             var storesIList = _storeService.GetAllStores();
             List<Store> storeList = storesIList.ToList();
@@ -217,7 +217,7 @@
                         subCategoryMapped.Add(prod.categoryMapped[1]);
                     if (prod.categoryMapped.Length > 2 && !subCategoryMapped.Contains(prod.categoryMapped[2]))
                         subCategoryMapped.Add(prod.categoryMapped[2]);
-                    
+
                     prod.isNeeded = false;
                 }
             }

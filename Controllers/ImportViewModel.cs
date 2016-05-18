@@ -412,7 +412,7 @@
                     break;
                 }
             }
-            //if tax category not exists, create new 
+            //if tax category not exists, create new
             if (!taxExist)
             {
                 tc = new TaxCategory();
@@ -455,7 +455,7 @@
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(formUrl);
             req.ContentType = "application/x-www-form-urlencoded";
             req.Method = "POST";
-            req.CookieContainer = cookieContainer; 
+            req.CookieContainer = cookieContainer;
             byte[] bytes = Encoding.ASCII.GetBytes(formParams);
             req.ContentLength = bytes.Length;
             using (Stream os = req.GetRequestStream())
@@ -511,9 +511,9 @@
                     {
                         Int32.TryParse(prod.Stock, out quantity);
                         productMotyle.Name = prod.Name;
-                        
+
                         productMotyle.ManufacturerPartNumber =prod.Ean;
-                        productMotyle.Price = newPrice(prod.Price, productsToImport.priceIncrease); 
+                        productMotyle.Price = newPrice(prod.Price, productsToImport.priceIncrease);
                         productMotyle.TaxCategoryId = GetTaxMotyle(prod.Vat);
                         productMotyle.Sku = prod.ISBN;
                         productMotyle.FullDescription = prod.Description;
@@ -526,7 +526,7 @@
 
                         int i = 0;
                         //add images to product from list of images links
-                      
+
                             var mimeType = GetMimeTypeFromFilePath(prod.Url_img); //get type of image
 
                             //get image from URL on wholesale server
@@ -698,7 +698,7 @@
                             {
                                 if (ware.isChecked)
                                 {
-                                   
+
                                     pwi = new ProductWarehouseInventory
                                     {
                                         WarehouseId = ware.warehouse.Id,
@@ -884,7 +884,7 @@
                     break;
                 }
             }
-            //if tax category not exists, create new 
+            //if tax category not exists, create new
             if (!taxExist)
             {
                 tc = new TaxCategory();

@@ -30,13 +30,13 @@
         [XmlElement("categories")]
         public string Categories { get; set; }
 
-        //persons 
+        //persons
         //firms
         [XmlElement("stock")]
         public string Stock { get; set; }
         [XmlElement("url_img")]
         public string Url_img { get; set; }
-        
+
         public bool isNeeded { get; set; }
         public string[] categoryMapped { get; set; }
 

@@ -10,7 +10,7 @@
             RuleFor(x => x.link).NotEmpty().WithMessage(localizationService.GetResource("Plugin.Misc.ImportProducts.Required"));
             RuleFor(x => x.login).NotEmpty().WithMessage(localizationService.GetResource("Plugin.Misc.ImportProducts.Required"));
             RuleFor(x => x.password).NotEmpty().WithMessage(localizationService.GetResource("Plugin.Misc.ImportProducts.Required"));
-            
+
         }
     }
 

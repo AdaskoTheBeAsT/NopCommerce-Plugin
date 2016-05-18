@@ -32,6 +32,6 @@
         Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS LoadFromXMLFileMotyle(string filePath);
         //Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.products LoadProductsFromXSLFileMotyle(string filePath);
         Nop.Plugin.Misc.ImportProducts.Model.MotyleKsiazkowe.PRODUCTS LoadProductsFromXML(importData importaData);
-        
+
     }
 }
